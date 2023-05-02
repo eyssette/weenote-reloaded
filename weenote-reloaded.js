@@ -1,5 +1,16 @@
 var start = false;
 
+document.addEventListener("DOMContentLoaded", function () {
+	var startSlides = document.querySelectorAll(".startSlide");
+	for (var i = 0; i < startSlides.length; i++) {
+		startSlides[i].addEventListener("click", function (e) {
+			if (!start) {
+				slideStart();
+			}
+		});
+	}
+});
+
 function slideStart() {
 	start = true;
 	var body = document.body;
@@ -19,9 +30,9 @@ function slideStart() {
 		style.fontSize = i + "px";
 		style.position = "absolute";
 
-		while (1) {
+		while (true) {
 			// Pour les paragraphes, la taille maximum de la police est 150
-			if (el.nodeName == "P" && i > 150) {
+			if (el.nodeName === "P" && i > 150) {
 				i = 150;
 			}
 			left = innerWidth - el.offsetWidth;
