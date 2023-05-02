@@ -1,4 +1,7 @@
-onload = function() {
+var start = false
+
+function slideStart() {
+  start = true;
   var body = document.body;
   var html = document.getElementsByTagName( 'html' )[0];
 html.classList.add("slides");
@@ -41,7 +44,7 @@ html.classList.add("slides");
 
   for (var el, count = 0; el = body.firstChild;) {
     if (el.nodeType == 1) {
-      calculateStyles(el); // Calcule les styles pour cet élément
+      calculateStyles(el);
       slides[++count] = el;
     }
     body.removeChild(el);
@@ -50,7 +53,15 @@ html.classList.add("slides");
   body.appendChild(document.createComment(""));
 
   !function sync() {
-    setTimeout(sync, 50);
+    document.onkeydown = function(e) {
+      if (e.key === "Escape" || e.key === "Esc" || e.keyCode === 27) {location.reload();}
+      else {
+        var i = slide + keyToSlideDirection[e.key]
+        if (i in slides) location.hash = i
+      }
+    }
+
+    setTimeout(sync, 10);
 
     var next = 0 | location.hash.match(/\d+/);
 
@@ -79,14 +90,6 @@ html.classList.add("slides");
     "PageUp": BACKWARD
   };
 
-  document.onkeydown = function(e) {
-    if (e.key !== "p") return; // Sort de la fonction si la touche "p" n'est pas pressée
-
-    var i = slide + keyToSlideDirection[e.key];
-
-    if (i in slides) location.hash = i;
-  };
-
   document.ontouchstart = function(e) {
     if (e.target.href) return;
 
@@ -95,3 +98,7 @@ html.classList.add("slides");
     if (i in slides) location.hash = i;
   };
 };
+
+document.onkeydown = function(e) {
+  if (!start && e.key==="p") {slideStart()}
+}
