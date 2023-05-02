@@ -11,7 +11,7 @@ html.classList.add("slides");
   // Calcule les styles pour un élément donné
   function calculateStyles(el) {
     var style = el.style;
-    var i = 1000;
+    var i = 300; // Taille de police maximum
     var top;
     var left;
 
@@ -20,6 +20,10 @@ html.classList.add("slides");
     style.position = "absolute";
 
     while (1) {
+      // Pour les paragraphes, la taille maximum de la police est 150
+      if (el.nodeName =="P" && i>150) {
+        i=150
+      }
       left = innerWidth - el.offsetWidth;
       top = innerHeight - el.offsetHeight;
 
