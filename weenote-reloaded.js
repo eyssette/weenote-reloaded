@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 });
 
+document.addEventListener("keydown", handleKeydown);
+document.addEventListener("touchstart", handleTouchstart);
+
 const FORWARD = 1;
 const BACKWARD = -1;
 const keyToSlideDirection = {
@@ -25,7 +28,7 @@ const keyToSlideDirection = {
 	PageUp: BACKWARD,
 };
 
-document.onkeydown = function (e) {
+function handleKeydown(e) {
 	if (!start && e.key === "p") {
 		slideStart();
 	}
@@ -39,12 +42,10 @@ document.onkeydown = function (e) {
 	}
 };
 
-document.ontouchstart = function (e) {
+function handleTouchstart(e) {
 	if (e.target.href) return;
-
-	var i = slide + (e.touches[0].pageX > innerWidth / 2 ? 1 : -1);
-
-	if (i in slides) location.hash = i;
+	var position = slide + (e.touches[0].pageX > innerWidth / 2 ? 1 : -1);
+	if (position in slides) location.hash = position;
 };
 
 // Fonction de calcul des styles pour chaque élément
