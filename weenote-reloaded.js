@@ -1,71 +1,95 @@
 onload = function() {
-  var body = document.body
-  var slides = {}
-  var slide
+  var body = document.body;
+  var slides = {};
+  var slide;
 
-  function fit(el) {
-    var style = el.style
-    var i = 1000
-    var top
-    var left
+  // Calcule les styles pour un élément donné
+  function calculateStyles(el) {
+    var style = el.style;
+    var i = 1000;
+    var top;
+    var left;
 
-    style.display  = "inline"
-    style.fontSize = i + "px"
-    style.position = "absolute"
+    style.display = "inline";
+    style.fontSize = i + "px";
+    style.position = "absolute";
 
     while (1) {
-      left = innerWidth - el.offsetWidth
-      top  = innerHeight - el.offsetHeight
+      left = innerWidth - el.offsetWidth;
+      top = innerHeight - el.offsetHeight;
 
-      if (top > 0 && left > 0) break
+      if (top > 0 && left > 0) break;
 
-      style.fontSize = (i -= i * 0.05) + "px"
+      style.fontSize = (i -= i * 0.05) + "px";
     }
 
-    style.display = "block"
-    style.top     = top / 2 + "px"
-    style.left    = left / 2 + "px"
+    style.display = "block";
+    style.top = top / 2 + "px";
+    style.left = left / 2 + "px";
+    
+    // Enregistre les styles calculés pour cet élément
+    el._styles = {
+      display: style.display,
+      fontSize: style.fontSize,
+      position: style.position,
+      top: style.top,
+      left: style.left
+    };
   }
 
   for (var el, count = 0; el = body.firstChild;) {
-    if (el.nodeType == 1) slides[++count] = el
-    body.removeChild(el)
+    if (el.nodeType == 1) {
+      calculateStyles(el); // Calcule les styles pour cet élément
+      slides[++count] = el;
+    }
+    body.removeChild(el);
   }
 
-  body.appendChild(document.createComment(""))
+  body.appendChild(document.createComment(""));
 
   !function sync() {
-    setTimeout(sync, 50)
+    setTimeout(sync, 50);
 
-    var next = 0 | location.hash.match(/\d+/)
+    var next = 0 | location.hash.match(/\d+/);
 
-    if (slide == next) return
+    if (slide == next) return;
 
-    next = Math.max(Math.min(count, next), 1)
-    next = slides[location.hash = slide = next]
+    next = Math.max(Math.min(count, next), 1);
+    next = slides[location.hash = slide = next];
 
-    body.replaceChild(next, body.firstChild)
-    fit(next)
-  }()
+    body.replaceChild(next, body.firstChild);
 
-  const FORWARD = 1
-  const BACKWARD = -1
+    // Applique les styles enregistrés pour cet élément
+    var styles = next._styles;
+    next.style.display = styles.display;
+    next.style.fontSize = styles.fontSize;
+    next.style.position = styles.position;
+    next.style.top = styles.top;
+    next.style.left = styles.left;
+  }();
+
+  const FORWARD = 1;
+  const BACKWARD = -1;
   const keyToSlideDirection = {
-    "ArrowRight": FORWARD, "ArrowLeft": BACKWARD,
-    "PageDown": FORWARD, "PageUp": BACKWARD
-  }
+    "ArrowRight": FORWARD,
+    "ArrowLeft": BACKWARD,
+    "PageDown": FORWARD,
+    "PageUp": BACKWARD
+  };
 
   document.onkeydown = function(e) {
-    var i = slide + keyToSlideDirection[e.key]
+    if (e.key !== "p") return; // Sort de la fonction si la touche "p" n'est pas pressée
 
-    if (i in slides) location.hash = i
-  }
+    var i = slide + keyToSlideDirection[e.key];
+
+    if (i in slides) location.hash = i;
+  };
 
   document.ontouchstart = function(e) {
-    if (e.target.href) return
+    if (e.target.href) return;
 
-    var i = slide + (e.touches[0].pageX > innerWidth / 2 ? 1 : -1)
+    var i = slide + (e.touches[0].pageX > innerWidth / 2 ? 1 : -1);
 
-    if (i in slides) location.hash = i
-  }
-}
+    if (i in slides) location.hash = i;
+  };
+};
