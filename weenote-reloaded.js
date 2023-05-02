@@ -25,7 +25,7 @@ function slideStart() {
 				i = 150;
 			}
 			left = innerWidth - el.offsetWidth;
-			top = innerHeight - el.offsetHeight;
+			top = innerHeight - el.offsetHeight - 60; // Petit décalage vers le haut
 
 			if (top > 0 && left > 0) break;
 
