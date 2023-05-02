@@ -26,27 +26,32 @@ const keyToSlideDirection = {
 	ArrowLeft: BACKWARD,
 	PageDown: FORWARD,
 	PageUp: BACKWARD,
+	ArrowUp: BACKWARD,
+	ArrowDown: FORWARD,
 };
 
 function handleKeydown(e) {
-	if (!start && e.key === "p") {
-		slideStart();
-	}
-	if (e.key === "Escape" || e.key === "Esc" || e.keyCode === 27) {
-		setTimeout(function () {
-			location.reload();
-		}, 100);
+	if (!start) {
+		if (e.key === "p") {
+			slideStart();
+		}
 	} else {
-		position = slide + keyToSlideDirection[e.key];
-		if (position in slides) location.hash = position;
+		if (e.key === "Escape" || e.key === "Esc" || e.keyCode === 27) {
+			setTimeout(function () {
+				location.reload();
+			}, 100);
+		} else {
+			position = slide + keyToSlideDirection[e.key];
+			if (position in slides) location.hash = position;
+		}
 	}
-};
+}
 
 function handleTouchstart(e) {
 	if (e.target.href) return;
 	var position = slide + (e.touches[0].pageX > innerWidth / 2 ? 1 : -1);
 	if (position in slides) location.hash = position;
-};
+}
 
 // Fonction de calcul des styles pour chaque élément
 
