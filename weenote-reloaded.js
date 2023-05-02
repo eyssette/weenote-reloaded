@@ -1,5 +1,7 @@
 onload = function() {
   var body = document.body;
+  var html = document.getElementsByTagName( 'html' )[0];
+html.classList.add("slides");
   var slides = {};
   var slide;
 
