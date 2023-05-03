@@ -1,3 +1,4 @@
+var auto = false; // Mettre ce paramètre sur true pour afficher automatiquement le diaporama. Sinon le déclenchement se fait en appuyant sur la touche "p" ou en cliquant sur un élément de classe "startSlides"
 var start = false;
 var position = 1;
 var slide;
@@ -6,13 +7,17 @@ var slides = {};
 // Event Listeners
 
 document.addEventListener("DOMContentLoaded", function () {
-	var startSlides = document.querySelectorAll(".startSlide");
-	for (var i = 0; i < startSlides.length; i++) {
-		startSlides[i].addEventListener("click", function (e) {
-			if (!start) {
-				slideStart();
-			}
-		});
+	if (auto) {
+    slideStart();
+  } else {
+		var startSlides = document.querySelectorAll(".startSlides");
+		for (var i = 0; i < startSlides.length; i++) {
+			startSlides[i].addEventListener("click", function (e) {
+				if (!start) {
+					slideStart();
+				}
+			});
+		}
 	}
 });
 
@@ -32,11 +37,11 @@ const keyToSlideDirection = {
 
 function handleKeydown(e) {
 	if (!start) {
-		if (e.key === "p") {
+		if (!auto && e.key === "p") {
 			slideStart();
 		}
 	} else {
-		if (e.key === "Escape" || e.key === "Esc" || e.keyCode === 27) {
+		if (!auto && (e.key === "Escape" || e.key === "Esc" || e.keyCode === 27)) {
 			setTimeout(function () {
 				location.reload();
 			}, 100);
@@ -53,14 +58,13 @@ function handleTouchstart(e) {
 	if (position in slides) location.hash = position;
 }
 
-
 function longer(champ, contender) {
-  return (contender.length > champ.length) ? contender : champ;
+	return contender.length > champ.length ? contender : champ;
 }
 
 function longestWord(str) {
-  var words = str.split(' ');
-  return words.reduce(longer);
+	var words = str.split(" ");
+	return words.reduce(longer);
 }
 
 // Fonction de calcul des styles pour chaque élément
@@ -76,7 +80,7 @@ function calculateStyles(el) {
 	style.position = "absolute";
 
 	while (true) {
-		if (!el.textContent) break // S'il n'y a pas de contenu texte, il ne faut pas chercher la taille de police optimale !
+		if (!el.textContent) break; // S'il n'y a pas de contenu texte, il ne faut pas chercher la taille de police optimale !
 		// Pour les paragraphes, la taille maximum de la police est 150
 		if (el.nodeName === "P" && i > 150) {
 			i = 150;
@@ -93,18 +97,25 @@ function calculateStyles(el) {
 	style.top = top / 2 + "px";
 	style.left = left / 2 + "px";
 
-  tagName = el.tagName
+	tagName = el.tagName;
 
-  if(tagName == "H1" || tagName == "H2" || tagName == "H3" || tagName == "H4" || tagName == "H5" || tagName == "H6") {
-    style.fontSize = (i-40) + "px"
-    longestWordLength = longestWord(el.textContent).length
-    if (longestWordLength > 12) {
-      style.fontSize = (i-70) + "px"
-    }
-    if (longestWordLength > 16) {
-      style.fontSize = (i-100) + "px"
-    }
-  }
+	if (
+		tagName == "H1" ||
+		tagName == "H2" ||
+		tagName == "H3" ||
+		tagName == "H4" ||
+		tagName == "H5" ||
+		tagName == "H6"
+	) {
+		style.fontSize = i - 40 + "px";
+		longestWordLength = longestWord(el.textContent).length;
+		if (longestWordLength > 12) {
+			style.fontSize = i - 70 + "px";
+		}
+		if (longestWordLength > 16) {
+			style.fontSize = i - 100 + "px";
+		}
+	}
 
 	// Enregistre les styles calculés pour cet élément
 	el._styles = {
