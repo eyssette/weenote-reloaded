@@ -53,6 +53,16 @@ function handleTouchstart(e) {
 	if (position in slides) location.hash = position;
 }
 
+
+function longer(champ, contender) {
+  return (contender.length > champ.length) ? contender : champ;
+}
+
+function longestWord(str) {
+  var words = str.split(' ');
+  return words.reduce(longer);
+}
+
 // Fonction de calcul des styles pour chaque élément
 
 function calculateStyles(el) {
@@ -81,6 +91,19 @@ function calculateStyles(el) {
 	style.display = "block";
 	style.top = top / 2 + "px";
 	style.left = left / 2 + "px";
+
+  tagName = el.tagName
+
+  if(tagName == "H1" || tagName == "H2" || tagName == "H3" || tagName == "H4" || tagName == "H5" || tagName == "H6") {
+    style.fontSize = (i-40) + "px"
+    longestWordLength = longestWord(el.textContent).length
+    if (longestWordLength > 12) {
+      style.fontSize = (i-70) + "px"
+    }
+    if (longestWordLength > 16) {
+      style.fontSize = (i-100) + "px"
+    }
+  }
 
 	// Enregistre les styles calculés pour cet élément
 	el._styles = {
