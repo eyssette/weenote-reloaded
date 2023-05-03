@@ -73,7 +73,7 @@ function calculateStyles(el) {
 		left = innerWidth - el.offsetWidth;
 		top = innerHeight - el.offsetHeight - 60; // Petit décalage vers le haut
 
-		if (top > 0 && left > 0) break;
+		if ((top > 0 && left > 0) || i < 10) break; // Taille de police minimum : 10. Important de fixer une taille minimum en cas de bloc sans texte (p.ex. : image)
 
 		style.fontSize = (i -= i * 0.05) + "px";
 	}
