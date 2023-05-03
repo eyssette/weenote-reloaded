@@ -76,6 +76,7 @@ function calculateStyles(el) {
 	style.position = "absolute";
 
 	while (true) {
+		if (!el.textContent) break // S'il n'y a pas de contenu texte, il ne faut pas chercher la taille de police optimale !
 		// Pour les paragraphes, la taille maximum de la police est 150
 		if (el.nodeName === "P" && i > 150) {
 			i = 150;
@@ -83,7 +84,7 @@ function calculateStyles(el) {
 		left = innerWidth - el.offsetWidth;
 		top = innerHeight - el.offsetHeight - 60; // Petit décalage vers le haut
 
-		if (top > 0 && left > 0) break;
+		if ((top > 0 && left > 0) || i < 10) break; // Taille de police minimum : 10
 
 		style.fontSize = (i -= i * 0.05) + "px";
 	}
