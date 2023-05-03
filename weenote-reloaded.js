@@ -85,11 +85,18 @@ function longestWord(str) {
 
 // Fonction de calcul des styles pour chaque élément
 
+var smallScreen = false
+
 function calculateStyles(el) {
 	var style = el.style;
 	var i = 300; // Taille de police maximum
 	var top;
 	var left;
+
+	if (window.innerWidth < 1400) {
+		i = 100; // Pour les petits écrans, la taille maximum de la police est : 100
+		smallScreen = true;
+	}
 
 	style.display = "inline";
 	style.fontSize = i + "px";
@@ -97,9 +104,8 @@ function calculateStyles(el) {
 
 	while (true) {
 		if (!el.textContent) break; // S'il n'y a pas de contenu texte, il ne faut pas chercher la taille de police optimale !
-		// Pour les paragraphes, la taille maximum de la police est 150
-		if (el.nodeName === "P" && i > 150) {
-			i = 150;
+		if (el.nodeName === "P" || el.nodeName === "BLOCKQUOTE") {
+			smallScreen ? i = Math.min(i, 80) : i = Math.min(i, 150); // Pour les paragraphes, la taille maximum de la police est 150 sur grand écran, 50 sur petit écran
 		}
 		left = innerWidth - el.offsetWidth;
 		top = innerHeight - el.offsetHeight - 60; // Petit décalage vers le haut
@@ -115,13 +121,14 @@ function calculateStyles(el) {
 
 	tagName = el.tagName;
 
-	if (
+	if ((
 		tagName == "H1" ||
 		tagName == "H2" ||
 		tagName == "H3" ||
 		tagName == "H4" ||
 		tagName == "H5" ||
 		tagName == "H6"
+		) && !smallScreen
 	) {
 		style.fontSize = i - 40 + "px";
 		longestWordLength = longestWord(el.textContent).length;
