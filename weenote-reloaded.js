@@ -72,6 +72,8 @@ function handleTouchstart(e) {
 	if (position in slides) location.hash = position;
 }
 
+// Fonctions pour calculer le plus long mot d'un élément afin d'ajuster la taille de police en cas de mot très long (qui pourrait dépasser du cadre)
+
 function longer(champ, contender) {
 	return contender.length > champ.length ? contender : champ;
 }
