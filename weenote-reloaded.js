@@ -1,15 +1,32 @@
-var auto = false; // Mettre ce paramètre sur true pour afficher automatiquement le diaporama. Sinon le déclenchement se fait en appuyant sur la touche "p" ou en cliquant sur un élément de classe "startSlides"
+var auto = false; // Mettre ce paramètre sur "true" pour afficher automatiquement le diaporama. Sinon le déclenchement se fait en appuyant sur la touche "p" ou en cliquant sur un élément de classe "startSlides"
 var start = false;
 var position = 1;
 var slide;
 var slides = {};
 
+if (auto) { // Pour éviter l'affichage du contenu initial si le déclenchement est configuré sur "auto", il faut masquer ce contenu.
+  // Attention : cela suppose de charger le script après la feuille de style
+	var defaultStylesheet = document.styleSheets[0];
+	if (defaultStylesheet) {
+		defaultStylesheet.insertRule(
+			"html:not(.slides) {display:none}",
+			defaultStylesheet.cssRules.length
+		);
+	}
+}
+
 // Event Listeners
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", load);
+document.addEventListener("keydown", handleKeydown);
+document.addEventListener("touchstart", handleTouchstart);
+
+// Fonctions pour les event listeners
+
+function load() {
 	if (auto) {
-    slideStart();
-  } else {
+		slideStart();
+	} else {
 		var startSlides = document.querySelectorAll(".startSlides");
 		for (var i = 0; i < startSlides.length; i++) {
 			startSlides[i].addEventListener("click", function (e) {
@@ -19,10 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 		}
 	}
-});
-
-document.addEventListener("keydown", handleKeydown);
-document.addEventListener("touchstart", handleTouchstart);
+}
 
 const FORWARD = 1;
 const BACKWARD = -1;
