@@ -1,4 +1,4 @@
-var auto = false; // Mettre ce paramètre sur "true" pour afficher automatiquement le diaporama. Sinon le déclenchement se fait en appuyant sur la touche "p" ou en cliquant sur un élément de classe "startSlides"
+var auto = false; // Mettre ce paramètre sur "true" pour afficher automatiquement le diaporama. Sinon le déclenchement se fait en appuyant sur la touche "p" ou "s" ou en cliquant sur un élément de classe "startSlides"
 var start = false;
 var position = 1;
 var slide;
@@ -55,7 +55,7 @@ const keyToSlideDirection = {
 
 function handleKeydown(e) {
 	if (!start) {
-		if (!auto && e.key === "p") {
+		if (!auto && (e.key === "p" || e.key ==="s")) {
 			slideStart();
 		}
 	} else {
