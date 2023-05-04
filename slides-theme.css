@@ -95,12 +95,9 @@ html.slides ol {
 	display: block;
 }
 
-html.slides ul {
-	list-style: none;
-}
 html.slides ol {
 	list-style: decimal;
-	margin-left: 1em !important;
+	margin-left: 0.9em !important;
 }
 
 html.slides pre,
@@ -221,6 +218,14 @@ html.slides code {
 html.slides mark {
 	background-color: #f1f3bd;
 	color: black;
+}
+
+html.slides ul {
+	list-style:none;
+}
+
+html.slides ul li:before {
+	content: "- ";
 }
 
 html.slides dd {
