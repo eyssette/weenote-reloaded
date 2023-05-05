@@ -1,4 +1,5 @@
-var auto = false; // Mettre ce paramètre sur "true" pour afficher automatiquement le diaporama. Sinon le déclenchement se fait en appuyant sur la touche "p" ou "s" ou en cliquant sur un élément de classe "startSlides"
+const auto = false; // Mettre ce paramètre sur "true" pour afficher automatiquement le diaporama. Sinon le déclenchement se fait en appuyant sur la touche "p" ou "s" ou en cliquant sur un élément de classe "startSlides"
+
 var start = false;
 var position = 1;
 var slide;
@@ -27,17 +28,20 @@ document.addEventListener("touchstart", handleTouchstart);
 
 // Fonctions pour les event listeners
 
+function handleClick() {
+	if (!start) {
+		slideStart();
+	}
+}
+
 function load() {
 	if (auto) {
 		slideStart();
 	} else {
-		var startSlides = document.querySelectorAll(".startSlides");
-		for (var i = 0; i < startSlides.length; i++) {
-			startSlides[i].addEventListener("click", function (e) {
-				if (!start) {
-					slideStart();
-				}
-			});
+		const startSlides = document.querySelectorAll(".startSlides");
+		const startSlidesLength = startSlides.length
+		for (var i = 0; i < startSlidesLength; i++) {
+			startSlides[i].addEventListener("click",handleClick);
 		}
 	}
 }
