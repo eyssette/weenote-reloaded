@@ -1,579 +1,539 @@
 <!DOCTYPE html>
 <html lang="fr-FR">
-	<head>
-		<meta charset="utf8" />
-		<title>weenote</title>
-		<style>
-			/* Source: https://github.com/xz/new.css */
+
+<head>
+	<meta charset="utf8" />
+	<title>weenote</title>
+	<style>
+		/* Source: https://github.com/xz/new.css */
+		:root {
+			--nc-font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+				Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+				sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+			--nc-font-mono: Consolas, monaco, "Ubuntu Mono", "Liberation Mono",
+				"Courier New", Courier, monospace;
+			--nc-tx-1: #000000;
+			--nc-tx-2: #1a1a1a;
+			--nc-bg-1: #ffffff;
+			--nc-bg-2: #f6f8fa;
+			--nc-bg-3: #e5e7eb;
+			--nc-lk-1: #0070f3;
+			--nc-lk-2: #0366d6;
+			--nc-lk-tx: #ffffff;
+			--nc-ac-1: #79ffe1;
+			--nc-ac-tx: #0c4047;
+		}
+
+		@media (prefers-color-scheme: dark) {
 			:root {
-				--nc-font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-					Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-					sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-				--nc-font-mono: Consolas, monaco, "Ubuntu Mono", "Liberation Mono",
-					"Courier New", Courier, monospace;
-				--nc-tx-1: #000000;
-				--nc-tx-2: #1a1a1a;
-				--nc-bg-1: #ffffff;
-				--nc-bg-2: #f6f8fa;
-				--nc-bg-3: #e5e7eb;
-				--nc-lk-1: #0070f3;
-				--nc-lk-2: #0366d6;
+				--nc-tx-1: #ffffff;
+				--nc-tx-2: #eeeeee;
+				--nc-bg-1: #000000;
+				--nc-bg-2: #111111;
+				--nc-bg-3: #222222;
+				--nc-lk-1: #3291ff;
+				--nc-lk-2: #0070f3;
 				--nc-lk-tx: #ffffff;
-				--nc-ac-1: #79ffe1;
-				--nc-ac-tx: #0c4047;
+				--nc-ac-1: #7928ca;
+				--nc-ac-tx: #ffffff;
 			}
-			@media (prefers-color-scheme: dark) {
-				:root {
-					--nc-tx-1: #ffffff;
-					--nc-tx-2: #eeeeee;
-					--nc-bg-1: #000000;
-					--nc-bg-2: #111111;
-					--nc-bg-3: #222222;
-					--nc-lk-1: #3291ff;
-					--nc-lk-2: #0070f3;
-					--nc-lk-tx: #ffffff;
-					--nc-ac-1: #7928ca;
-					--nc-ac-tx: #ffffff;
-				}
-			}
-			* {
-				margin: 0;
-				padding: 0;
-			}
-			address,
-			area,
-			article,
-			aside,
-			audio,
-			blockquote,
-			datalist,
-			details,
-			dl,
-			fieldset,
-			figure,
-			form,
-			iframe,
-			img,
-			input,
-			meter,
-			nav,
-			ol,
-			optgroup,
-			option,
-			output,
-			p,
-			pre,
-			progress,
-			ruby,
-			section,
-			table,
-			textarea,
-			ul,
-			video {
-				margin-bottom: 1rem;
-			}
-			button,
-			html,
-			input,
-			select {
-				font-family: var(--nc-font-sans);
-			}
-			body {
-				margin: 0 auto;
-				max-width: 750px;
-				padding: 2rem;
-				border-radius: 6px;
-				overflow-x: hidden;
-				word-break: break-word;
-				overflow-wrap: break-word;
-				background: var(--nc-bg-1);
-				color: var(--nc-tx-2);
-				font-size: 1.03rem;
-				line-height: 1.5;
-			}
-			::selection {
-				background: var(--nc-ac-1);
-				color: var(--nc-ac-tx);
-			}
-			h1,
-			h2,
-			h3,
-			h4,
-			h5,
-			h6 {
-				line-height: 1;
-				color: var(--nc-tx-1);
-				padding-top: 0.875rem;
-			}
-			h1,
-			h2,
-			h3 {
-				color: var(--nc-tx-1);
-				padding-bottom: 2px;
-				margin-bottom: 8px;
-			}
-			h4,
-			h5,
-			h6 {
-				margin-bottom: 0.3rem;
-			}
-			h1 {
-				font-size: 2.25rem;
-			}
-			h2 {
-				font-size: 1.85rem;
-			}
-			h3 {
-				font-size: 1.55rem;
-			}
-			h4 {
-				font-size: 1.25rem;
-			}
-			h5 {
-				font-size: 1rem;
-			}
-			h6 {
-				font-size: 0.875rem;
-			}
-			a {
-				color: var(--nc-lk-1);
-			}
-			a:hover {
-				color: var(--nc-lk-2);
-			}
-			abbr:hover {
-				cursor: help;
-			}
-			blockquote {
-				padding: 1.5rem;
-				background: var(--nc-bg-2);
-				border-left: 5px solid var(--nc-bg-3);
-			}
-			abbr {
-				cursor: help;
-			}
-			blockquote :last-child {
-				padding-bottom: 0;
-				margin-bottom: 0;
-			}
-			header {
-				background: var(--nc-bg-2);
-				border-bottom: 1px solid var(--nc-bg-3);
-				padding: 2rem 1.5rem;
-				margin: -2rem calc(0px - (50vw - 50%)) 2rem;
-				padding-left: calc(50vw - 50%);
-				padding-right: calc(50vw - 50%);
-			}
-			header h1,
-			header h2,
-			header h3 {
-				padding-bottom: 0;
-				border-bottom: 0;
-			}
-			header > :first-child {
-				margin-top: 0;
-				padding-top: 0;
-			}
-			header > :last-child {
-				margin-bottom: 0;
-			}
-			a button,
-			button,
-			input[type="button"],
-			input[type="reset"],
-			input[type="submit"] {
-				font-size: 1rem;
-				display: inline-block;
-				padding: 6px 12px;
-				text-align: center;
-				text-decoration: none;
-				white-space: nowrap;
-				background: var(--nc-lk-1);
-				color: var(--nc-lk-tx);
-				border: 0;
-				border-radius: 4px;
-				box-sizing: border-box;
-				cursor: pointer;
-				color: var(--nc-lk-tx);
-			}
-			a button[disabled],
-			button[disabled],
-			input[type="button"][disabled],
-			input[type="reset"][disabled],
-			input[type="submit"][disabled] {
-				cursor: default;
-				opacity: 0.5;
-				cursor: not-allowed;
-			}
-			.button:focus,
-			.button:hover,
-			button:focus,
-			button:hover,
-			input[type="button"]:focus,
-			input[type="button"]:hover,
-			input[type="reset"]:focus,
-			input[type="reset"]:hover,
-			input[type="submit"]:focus,
-			input[type="submit"]:hover {
-				background: var(--nc-lk-2);
-			}
-			code,
-			kbd,
-			pre,
-			samp {
-				font-family: var(--nc-font-mono);
-			}
-			code,
-			kbd,
-			pre,
-			samp {
-				background: var(--nc-bg-2);
-				border: 1px solid var(--nc-bg-3);
-				border-radius: 4px;
-				padding: 3px 6px;
-				font-size: 0.9rem;
-			}
-			kbd {
-				border-bottom: 3px solid var(--nc-bg-3);
-			}
-			pre {
-				padding: 1rem 1.4rem;
-				max-width: 100%;
-				overflow: auto;
-			}
-			pre code {
-				background: inherit;
-				font-size: inherit;
-				color: inherit;
-				border: 0;
-				padding: 0;
-				margin: 0;
-			}
-			code pre {
-				display: inline;
-				background: inherit;
-				font-size: inherit;
-				color: inherit;
-				border: 0;
-				padding: 0;
-				margin: 0;
-			}
-			details {
-				padding: 0.6rem 1rem;
-				background: var(--nc-bg-2);
-				border: 1px solid var(--nc-bg-3);
-				border-radius: 4px;
-			}
-			summary {
-				cursor: pointer;
-				font-weight: 700;
-			}
-			details[open] {
-				padding-bottom: 0.75rem;
-			}
-			details[open] summary {
-				margin-bottom: 6px;
-			}
-			details[open] > :last-child {
-				margin-bottom: 0;
-			}
-			dt {
-				font-weight: 700;
-			}
-			dd::before {
-				content: "→ ";
-			}
-			hr {
-				border: 0;
-				border-bottom: 1px solid var(--nc-bg-3);
-				margin: 1rem auto;
-			}
-			fieldset {
-				margin-top: 1rem;
-				padding: 2rem;
-				border: 1px solid var(--nc-bg-3);
-				border-radius: 4px;
-			}
-			legend {
-				padding: auto 0.5rem;
-			}
-			table {
-				border-collapse: collapse;
-				width: 100%;
-			}
-			td,
-			th {
-				border: 1px solid var(--nc-bg-3);
-				text-align: left;
-				padding: 0.5rem;
-			}
-			th {
-				background: var(--nc-bg-2);
-			}
-			tr:nth-child(even) {
-				background: var(--nc-bg-2);
-			}
-			table caption {
-				font-weight: 700;
-				margin-bottom: 0.5rem;
-			}
-			textarea {
-				max-width: 100%;
-			}
-			ol,
-			ul {
-				padding-left: 2rem;
-			}
-			li {
-				margin-top: 0.4rem;
-			}
-			ol ol,
-			ol ul,
-			ul ol,
-			ul ul {
-				margin-bottom: 0;
-			}
-			mark {
-				padding: 3px 6px;
-				background: var(--nc-ac-1);
-				color: var(--nc-ac-tx);
-			}
-			input,
-			select,
-			textarea {
-				padding: 6px 12px;
-				margin-bottom: 0.5rem;
-				background: var(--nc-bg-2);
-				color: var(--nc-tx-2);
-				border: 1px solid var(--nc-bg-3);
-				border-radius: 4px;
-				box-shadow: none;
-				box-sizing: border-box;
-			}
-			img {
-				max-width: 100%;
-			}
-			.info {
-				color: var(--nc-lk-2);
-				border: 1px solid var(--nc-lk-2);
-				padding: 10px 15px;
-				padding-top: 1.5rem;
-				border-radius: 15px;
-				margin: 1rem 0;
-			}
-			.danger {
-				color: #b94a48;
-				border: 1px solid #b94a48;
-				padding: 10px 15px;
-				padding-top: 1.5rem;
-				border-radius: 15px;
-				margin: 1rem 0;
-			}
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		address,
+		area,
+		article,
+		aside,
+		audio,
+		blockquote,
+		datalist,
+		details,
+		dl,
+		fieldset,
+		figure,
+		form,
+		iframe,
+		img,
+		input,
+		meter,
+		nav,
+		ol,
+		optgroup,
+		option,
+		output,
+		p,
+		pre,
+		progress,
+		ruby,
+		section,
+		table,
+		textarea,
+		ul,
+		video {
+			margin-bottom: 1rem;
+		}
+
+		button,
+		html,
+		input,
+		select {
+			font-family: var(--nc-font-sans);
+		}
+
+		body {
+			margin: 0 auto;
+			max-width: 750px;
+			padding: 2rem;
+			border-radius: 6px;
+			overflow-x: hidden;
+			word-break: break-word;
+			overflow-wrap: break-word;
+			background: var(--nc-bg-1);
+			color: var(--nc-tx-2);
+			font-size: 1.03rem;
+			line-height: 1.5;
+		}
+
+		::selection {
+			background: var(--nc-ac-1);
+			color: var(--nc-ac-tx);
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			line-height: 1;
+			color: var(--nc-tx-1);
+			padding-top: 0.875rem;
+		}
+
+		h1,
+		h2,
+		h3 {
+			color: var(--nc-tx-1);
+			padding-bottom: 2px;
+			margin-bottom: 8px;
+		}
+
+		h4,
+		h5,
+		h6 {
+			margin-bottom: 0.3rem;
+		}
+
+		h1 {
+			font-size: 2.25rem;
+		}
+
+		h2 {
+			font-size: 1.85rem;
+		}
+
+		h3 {
+			font-size: 1.55rem;
+		}
+
+		h4 {
+			font-size: 1.25rem;
+		}
+
+		h5 {
+			font-size: 1rem;
+		}
+
+		h6 {
+			font-size: 0.875rem;
+		}
+
+		a {
+			color: var(--nc-lk-1);
+		}
+
+		a:hover {
+			color: var(--nc-lk-2);
+		}
+
+		abbr:hover {
+			cursor: help;
+		}
+
+		blockquote {
+			padding: 1.5rem;
+			background: var(--nc-bg-2);
+			border-left: 5px solid var(--nc-bg-3);
+		}
+
+		abbr {
+			cursor: help;
+		}
+
+		blockquote :last-child {
+			padding-bottom: 0;
+			margin-bottom: 0;
+		}
+
+		header {
+			background: var(--nc-bg-2);
+			border-bottom: 1px solid var(--nc-bg-3);
+			padding: 2rem 1.5rem;
+			margin: -2rem calc(0px - (50vw - 50%)) 2rem;
+			padding-left: calc(50vw - 50%);
+			padding-right: calc(50vw - 50%);
+		}
+
+		header h1,
+		header h2,
+		header h3 {
+			padding-bottom: 0;
+			border-bottom: 0;
+		}
+
+		header> :first-child {
+			margin-top: 0;
+			padding-top: 0;
+		}
+
+		header> :last-child {
+			margin-bottom: 0;
+		}
+
+		a button,
+		button,
+		input[type="button"],
+		input[type="reset"],
+		input[type="submit"] {
+			font-size: 1rem;
+			display: inline-block;
+			padding: 6px 12px;
+			text-align: center;
+			text-decoration: none;
+			white-space: nowrap;
+			background: var(--nc-lk-1);
+			color: var(--nc-lk-tx);
+			border: 0;
+			border-radius: 4px;
+			box-sizing: border-box;
+			cursor: pointer;
+			color: var(--nc-lk-tx);
+		}
+
+		a button[disabled],
+		button[disabled],
+		input[type="button"][disabled],
+		input[type="reset"][disabled],
+		input[type="submit"][disabled] {
+			cursor: default;
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+
+		.button:focus,
+		.button:hover,
+		button:focus,
+		button:hover,
+		input[type="button"]:focus,
+		input[type="button"]:hover,
+		input[type="reset"]:focus,
+		input[type="reset"]:hover,
+		input[type="submit"]:focus,
+		input[type="submit"]:hover {
+			background: var(--nc-lk-2);
+		}
+
+		code,
+		kbd,
+		pre,
+		samp {
+			font-family: var(--nc-font-mono);
+		}
+
+		code,
+		kbd,
+		pre,
+		samp {
+			background: var(--nc-bg-2);
+			border: 1px solid var(--nc-bg-3);
+			border-radius: 4px;
+			padding: 3px 6px;
+			font-size: 0.9rem;
+		}
+
+		kbd {
+			border-bottom: 3px solid var(--nc-bg-3);
+		}
+
+		pre {
+			padding: 1rem 1.4rem;
+			max-width: 100%;
+			overflow: auto;
+		}
+
+		pre code {
+			background: inherit;
+			font-size: inherit;
+			color: inherit;
+			border: 0;
+			padding: 0;
+			margin: 0;
+		}
+
+		code pre {
+			display: inline;
+			background: inherit;
+			font-size: inherit;
+			color: inherit;
+			border: 0;
+			padding: 0;
+			margin: 0;
+		}
+
+		details {
+			padding: 0.6rem 1rem;
+			background: var(--nc-bg-2);
+			border: 1px solid var(--nc-bg-3);
+			border-radius: 4px;
+		}
+
+		summary {
+			cursor: pointer;
+			font-weight: 700;
+		}
+
+		details[open] {
+			padding-bottom: 0.75rem;
+		}
+
+		details[open] summary {
+			margin-bottom: 6px;
+		}
+
+		details[open]> :last-child {
+			margin-bottom: 0;
+		}
+
+		dt {
+			font-weight: 700;
+		}
+
+		dd::before {
+			content: "→ ";
+		}
+
+		hr {
+			border: 0;
+			border-bottom: 1px solid var(--nc-bg-3);
+			margin: 1rem auto;
+		}
+
+		fieldset {
+			margin-top: 1rem;
+			padding: 2rem;
+			border: 1px solid var(--nc-bg-3);
+			border-radius: 4px;
+		}
+
+		legend {
+			padding: auto 0.5rem;
+		}
+
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		td,
+		th {
+			border: 1px solid var(--nc-bg-3);
+			text-align: left;
+			padding: 0.5rem;
+		}
+
+		th {
+			background: var(--nc-bg-2);
+		}
+
+		tr:nth-child(even) {
+			background: var(--nc-bg-2);
+		}
+
+		table caption {
+			font-weight: 700;
+			margin-bottom: 0.5rem;
+		}
+
+		textarea {
+			max-width: 100%;
+		}
+
+		ol,
+		ul {
+			padding-left: 2rem;
+		}
+
+		li {
+			margin-top: 0.4rem;
+		}
+
+		ol ol,
+		ol ul,
+		ul ol,
+		ul ul {
+			margin-bottom: 0;
+		}
+
+		mark {
+			padding: 3px 6px;
+			background: var(--nc-ac-1);
+			color: var(--nc-ac-tx);
+		}
+
+		input,
+		select,
+		textarea {
+			padding: 6px 12px;
+			margin-bottom: 0.5rem;
+			background: var(--nc-bg-2);
+			color: var(--nc-tx-2);
+			border: 1px solid var(--nc-bg-3);
+			border-radius: 4px;
+			box-shadow: none;
+			box-sizing: border-box;
+		}
+
+		img {
+			max-width: 100%;
+		}
+
+		.info {
+			color: var(--nc-lk-2);
+			border: 1px solid var(--nc-lk-2);
+			padding: 10px 15px;
+			padding-top: 1.5rem;
+			border-radius: 15px;
+			margin: 1rem 0;
+		}
+
+		.danger {
+			color: #b94a48;
+			border: 1px solid #b94a48;
+			padding: 10px 15px;
+			padding-top: 1.5rem;
+			border-radius: 15px;
+			margin: 1rem 0;
+		}
+
+		.success {
+			color: #018739;
+			border: 1px solid #018739;
+			padding: 10px 15px;
+			padding-top: 1.5rem;
+			border-radius: 15px;
+			margin: 1rem 0;
+		}
+
+		@media (prefers-color-scheme: dark) {
+
+			.info,
+			.danger,
 			.success {
-				color: #018739;
-				border: 1px solid #018739;
-				padding: 10px 15px;
-				padding-top: 1.5rem;
-				border-radius: 15px;
-				margin: 1rem 0;
-			}
-			@media (prefers-color-scheme: dark) {
-				.info,
-				.danger,
-				.success {
-					background-color: var(--nc-bg-2);
-				}
-			}
-			#footnotes {
-				margin-top: 3rem;
-			}
-			a.footnote-back {
-				margin-left: 1em;
-				opacity: 0.7;
-			}
-			figcaption {
-				text-align: center;
-				margin-top: -6rem;
-				display: none;
-				position: absolute;
-				margin-left: 1em;
-				color: white;
-				background-color: rgba(0, 0, 0, 0.5);
-				padding: 10px;
-			}
-			figure:hover figcaption {
-				display: block;
-			}
-			h2,
-			h3 {
-				margin-top: 2.5rem;
-				margin-bottom: 2rem;
-				padding-bottom: 0.6em;
-				border-bottom: 1px solid #9998;
-			}
-			h3 {
-				border-color: var(--nc-bg-3);
-			}
-			h4,
-			h5,
-			h6 {
-				margin-top: 2rem;
-				margin-bottom: 1.5rem;
-			}
-
-			.general-toc {
 				background-color: var(--nc-bg-2);
-				padding: 20px;
-				margin: 1em;
 			}
+		}
 
-			@media screen and (min-width: 800px) {
-				.general-toc {
-					margin: 3em;
-				}
+		#footnotes {
+			margin-top: 3rem;
+		}
+
+		a.footnote-back {
+			margin-left: 1em;
+			opacity: 0.7;
+		}
+
+		figcaption {
+			text-align: center;
+			margin-top: -6rem;
+			display: none;
+			position: absolute;
+			margin-left: 1em;
+			color: white;
+			background-color: rgba(0, 0, 0, 0.5);
+			padding: 10px;
+		}
+
+		figure:hover figcaption {
+			display: block;
+		}
+
+		h2,
+		h3 {
+			margin-top: 2.5rem;
+			margin-bottom: 2rem;
+			padding-bottom: 0.6em;
+			border-bottom: 1px solid #9998;
+		}
+
+		h3 {
+			border-color: var(--nc-bg-3);
+		}
+
+		h4,
+		h5,
+		h6 {
+			margin-top: 2rem;
+			margin-bottom: 1.5rem;
+		}
+
+		.general-toc {
+			background-color: var(--nc-bg-2);
+			padding: 20px;
+			margin: 1em;
+		}
+
+		@media screen and (min-width: 800px) {
+			.general-toc {
+				margin: 3em;
 			}
+		}
+	</style>
+	<link rel="stylesheet" href="slides-theme.min.css">
+	</link>
+	<script src="weenote-reloaded.min.js"></script>
+</head>
 
-			
-			
-
-		</style>
-		<link rel="stylesheet" href="slides-theme.min.css"></link>
-		<script src="weenote-reloaded.min.js"></script>
-	</head>
-	<body>
-		<header id="title-block-header" class="startSlides">
-   <h1 class="title">Page d’accueil</h1>
-			  </header>
- <p>Le titre de niveau 1 définit le titre de la page.</p>
-<p>Voici un paragraphe de texte. On peut mettre du texte en
-<strong>gras</strong>, en <em>italique</em> ou en <strong><em>gras et
-italique</em></strong>.</p>
-<p>On peut aussi écrire des formules mathématiques <span class="math inline"><mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="0" style="font-size: 119%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D438 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="4"><mjx-c class="mjx-c1D45A TEX-I"></mjx-c></mjx-mi><mjx-msup><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D450 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.363em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-script></mjx-msup></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></math></mjx-assistive-mml></mjx-container></span></p>
-<p><span class="math display"><mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" display="true" tabindex="0" ctxtmenu_counter="1" style="font-size: 119%; position: relative;"><mjx-math display="true" class="MJX-TEX" aria-hidden="true" style="margin-left: 0px; margin-right: 0px;"><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D445 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-texatom size="s" texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D707 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D708 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom></mjx-texatom></mjx-script></mjx-msub><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mfrac space="3"><mjx-frac type="d"><mjx-num><mjx-nstrut type="d"></mjx-nstrut><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-num><mjx-dbox><mjx-dtable><mjx-line type="d"></mjx-line><mjx-row><mjx-den><mjx-dstrut type="d"></mjx-dstrut><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-den></mjx-row></mjx-dtable></mjx-dbox></mjx-frac></mjx-mfrac><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D454 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-texatom size="s" texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D707 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D708 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom></mjx-texatom></mjx-script></mjx-msub><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="3"><mjx-c class="mjx-c39B"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D454 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-texatom size="s" texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D707 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D708 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom></mjx-texatom></mjx-script></mjx-msub><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="4"><mjx-c class="mjx-c1D705 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D447 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.12em;"><mjx-texatom size="s" texclass="ORD"><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D454 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-texatom size="s" texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D707 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D708 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom></mjx-texatom></mjx-script></mjx-msub></mjx-texatom></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>R</mi><mrow data-mjx-texclass="ORD"><mi>μ</mi><mrow data-mjx-texclass="ORD"></mrow><mi>ν</mi><mrow data-mjx-texclass="ORD"></mrow></mrow></msub><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msub><mi>g</mi><mrow data-mjx-texclass="ORD"><mi>μ</mi><mrow data-mjx-texclass="ORD"></mrow><mi>ν</mi><mrow data-mjx-texclass="ORD"></mrow></mrow></msub><mo>+</mo><mi mathvariant="normal">Λ</mi><mrow data-mjx-texclass="ORD"></mrow><msub><mi>g</mi><mrow data-mjx-texclass="ORD"><mi>μ</mi><mrow data-mjx-texclass="ORD"></mrow><mi>ν</mi><mrow data-mjx-texclass="ORD"></mrow></mrow></msub><mo>=</mo><mi>κ</mi><mrow data-mjx-texclass="ORD"></mrow><msub><mi>T</mi><mrow data-mjx-texclass="ORD"><msub><mi>g</mi><mrow data-mjx-texclass="ORD"><mi>μ</mi><mrow data-mjx-texclass="ORD"></mrow><mi>ν</mi><mrow data-mjx-texclass="ORD"></mrow></mrow></msub></mrow></msub></math></mjx-assistive-mml></mjx-container></span></p>
-<section>
-	<p>Une équation : </p>
-	<p><span class="math display"><mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" display="true" tabindex="0" ctxtmenu_counter="1" style="font-size: 119%; position: relative;"><mjx-math display="true" class="MJX-TEX" aria-hidden="true" style="margin-left: 0px; margin-right: 0px;"><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D445 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-texatom size="s" texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D707 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D708 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom></mjx-texatom></mjx-script></mjx-msub><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mfrac space="3"><mjx-frac type="d"><mjx-num><mjx-nstrut type="d"></mjx-nstrut><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-num><mjx-dbox><mjx-dtable><mjx-line type="d"></mjx-line><mjx-row><mjx-den><mjx-dstrut type="d"></mjx-dstrut><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-den></mjx-row></mjx-dtable></mjx-dbox></mjx-frac></mjx-mfrac><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D454 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-texatom size="s" texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D707 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D708 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom></mjx-texatom></mjx-script></mjx-msub><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-mi class="mjx-n" space="3"><mjx-c class="mjx-c39B"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D454 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-texatom size="s" texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D707 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D708 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom></mjx-texatom></mjx-script></mjx-msub><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="4"><mjx-c class="mjx-c1D705 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D447 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.12em;"><mjx-texatom size="s" texclass="ORD"><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D454 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-texatom size="s" texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D707 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D708 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"></mjx-texatom></mjx-texatom></mjx-script></mjx-msub></mjx-texatom></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>R</mi><mrow data-mjx-texclass="ORD"><mi>μ</mi><mrow data-mjx-texclass="ORD"></mrow><mi>ν</mi><mrow data-mjx-texclass="ORD"></mrow></mrow></msub><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msub><mi>g</mi><mrow data-mjx-texclass="ORD"><mi>μ</mi><mrow data-mjx-texclass="ORD"></mrow><mi>ν</mi><mrow data-mjx-texclass="ORD"></mrow></mrow></msub><mo>+</mo><mi mathvariant="normal">Λ</mi><mrow data-mjx-texclass="ORD"></mrow><msub><mi>g</mi><mrow data-mjx-texclass="ORD"><mi>μ</mi><mrow data-mjx-texclass="ORD"></mrow><mi>ν</mi><mrow data-mjx-texclass="ORD"></mrow></mrow></msub><mo>=</mo><mi>κ</mi><mrow data-mjx-texclass="ORD"></mrow><msub><mi>T</mi><mrow data-mjx-texclass="ORD"><msub><mi>g</mi><mrow data-mjx-texclass="ORD"><mi>μ</mi><mrow data-mjx-texclass="ORD"></mrow><mi>ν</mi><mrow data-mjx-texclass="ORD"></mrow></mrow></msub></mrow></msub></math></mjx-assistive-mml></mjx-container></span></p>
-</section>
-
-<h2 id="titre-de-niveau-2">Titre de niveau 2</h2>
-<p>On peut également créer des
-<span style="white-space:nowrap">listes :</span></p>
-<ul>
-<li>Item 1</li>
-<li>Item 2</li>
-<li>Item 3</li>
-</ul>
-<h3 id="titre-de-niveau-3">Titre de niveau 3</h3>
-<p>Ou des listes
-<span style="white-space:nowrap">numérotées :</span></p>
-<ol type="1">
-<li>Item 1</li>
-<li>Item 2</li>
-<li>Item 3</li>
-</ol>
-<h4 id="titre-de-niveau-4">Titre de niveau 4</h4>
-<p>On peut insérer des
-<span style="white-space:nowrap">liens :</span> <a href="https://forge.aeif.fr/">Texte du lien</a></p>
-<p>Et des <span style="white-space:nowrap">images :</span></p>
-<figure>
-<img src="https://picsum.photos/id/17/2500/1667" alt="Légende de la photo">
-<figcaption aria-hidden="true">Légende de la photo</figcaption>
-</figure>
-<h5 id="titre-de-niveau-5">Titre de niveau 5</h5>
-<p>On peut également ajouter du
-<span style="white-space:nowrap">code :</span></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello world!"</span>)</span>
-	<span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello world!"</span>)</span>
-	<span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello world!"</span>)</span>
-	<span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello world!"</span>)</span>
-	<span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello world!"</span>)</span>
-	<span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hello world!"</span>)</span>
-</code></pre></div>
-<p>Ou du texte en ligne <code>comme ceci</code>.</p>
-<h6 id="titre-de-niveau-6">Titre de niveau 6</h6>
-<blockquote>
-<p>On peut aussi citer du texte.</p>
-</blockquote>
-<p>Et enfin, on peut créer des
-<span style="white-space:nowrap">tables :</span></p>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;">Colonne 1</th>
-<th style="text-align: center;">Colonne 2</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">Ligne 1, Colonne 1</td>
-<td style="text-align: center;">Ligne 1, Colonne 2</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Ligne 2, Colonne 1</td>
-<td style="text-align: center;">Ligne 2, Colonne 2</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="syntaxe-plus-avancée">Syntaxe plus avancée</h2>
-<h3 id="modifications-du-texte">Modifications du texte</h3>
-<p>On peut <u>souligner</u> du texte, <mark>surligner</mark> du texte ou
-<del>barrer</del> du texte.</p>
-<p>On peut aussi utiliser des exposants (19<sup>th</sup>) ou des indices
-(H<sub>2</sub>O)</p>
-<h3 id="ajouts-dans-le-texte">Ajouts dans le texte</h3>
-<p>On peut utiliser des codes pour insérer des
-<span style="white-space:nowrap">emojis :</span> <span class="emoji" data-emoji="smile">😄</span> <span class="emoji" data-emoji="+1">👍</span></p>
-<p>On peut écrire des
-<span style="white-space:nowrap">définitions :</span></p>
-<dl>
-<dt>Terme à définir</dt>
-<dd>
-Définition du terme
-</dd>
-</dl>
-<p>On peut utiliser des notes<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> de bas de page <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<p>On peut utiliser des boîtes
-<span style="white-space:nowrap">prédéfinies :</span></p>
-<div class="info">
-<p>Boîte de contenu de type “Informations”</p>
-</div>
-<div class="danger">
-<p>Boîte de contenu de type “Danger”</p>
-</div>
-<div class="success">
-<p>Boîte de contenu de type “Succès”</p>
-</div>
-<h2 id="liste-des-pages-de-ce-site">Liste des pages de ce site</h2>
-<p>On peut enfin inclure la liste des pages du site (cette liste est
-générée automatiquement)</p>
-<section class="general-toc">
-<ul>
-<li>
-<a href="index.html">Page d’accueil</a>
-</li>
-<li>
-<a href="README.html">Créer simplement des pages web avec le modèle
-Pandoc</a>
-</li>
-</ul>
-<h3>
-dossier
-</h3>
-<ul>
-<li>
-<a href="dossier/test.html">Fichier test</a>
-</li>
-</ul>
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>Ceci est la première note de bas de page.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Voici la deuxième.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section> 
-
-
+<body>
+	<header id="title-block-header" class="startSlides">
+		<h1 id="weenote-reloaded">Weenote-reloaded</h1>
+	</header>
+	<p>Weenote-reloaded est un fork de <a href="https://github.com/jed/weenote">weenote</a>.</p>
+	<h2 id="le-principe">Le principe</h2>
+	<p>L’idée initiale est conservée : il s’agit de proposer un outil simple
+		pour pouvoir transformer une page HTML en un diaporama.</p>
+	<ul>
+		<li>Chaque élément enfant de <code>body</code>devient une page
+			automatiquement ajustée pour s’adapter à la fenêtre.</li>
+		<li>On peut naviguer dans le document avec les flèches ou en appuyant à
+			droite ou à gauche d’un écran tactile.</li>
+	</ul>
+	<h2 id="les-ajouts-par-rapport-au-projet-initial">Les ajouts par rapport
+		au projet initial</h2>
+	<p>Par rapport au script initial, il propose :</p>
+	<ol type="1">
+		<li>Une réécriture et optimisation du code.</li>
+		<li>La possibilité de démarrer le diapo en appuyant sur une touche
+			(<code>s</code>ou <code>p</code>) ou sur un élément auquel on a appliqué
+			la classe <code>startSlides</code>.</li>
+		<li>Un thème par défaut</li>
+		<li>Un meilleur affichage de plusieurs éléments : les balises codes et
+			math (qui sont redimensionnées à l’aide de <a href="https://github.com/STRML/textFit">textFit</a>), les
+			titres avec
+			des mots longs.</li>
+	</ol>
 </body>
 </html>

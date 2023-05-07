@@ -1,24 +1,19 @@
 # Weenote-reloaded
 
-A quick/dirty/tiny tool for creating simple [Takahashi](http://en.wikipedia.org/wiki/Takahashi_method)-style presentations. It was inspired by [tmcw](https://github.com/tmcw)'s [big](https://github.com/tmcw/big).
+Weenote-reloaded est un fork de [weenote](https://github.com/jed/weenote).
 
-Check out [the demo](https://eyssette.github.io/weenote-reloaded/) if you'd like.
+## Le principe
 
-## What it is
+L'idée initiale est conservée : il s'agit de proposer un outil simple pour pouvoir transformer une page HTML en un diaporama.
 
-weenote-reloaded is ~60 lines of JavaScript that turns an HTML document into a slideshow. It turns every child node in the document's `BODY` into a slide, automatically zoomed to fit the window. It also binds taps and arrow keys for navigation.
+- Chaque élément enfant de `body`devient une page automatiquement ajustée pour s'adapter à la fenêtre.
+- On peut naviguer dans le document avec les flèches ou en appuyant à droite ou à gauche d'un écran tactile.
 
-## How to use
+## Les ajouts par rapport au projet initial
 
-1. Create an HTML document.
-2. Hotlink [weenote-reloaded.js](https://raw.githubusercontent.com/eyssette/weenote-reloaded/main/weenote-reloaded.js) in the `HEAD`.
-3. Add all slides as child elements of the `BODY`.
-4. Load it in your browser.
-5. Present!
+Par rapport au script initial, il propose :
 
-To show the next slide: tap the right half of the page or press the right arrow.
-To show the previous slide: tap the left half of the page or press the left arrow.
-
-## License
-
-BSD
+1. Une réécriture et optimisation du code.
+2. La possibilité de démarrer le diapo en appuyant sur une touche (`s`ou `p`) ou sur un élément auquel on a appliqué la classe `startSlides`.
+3. Un thème par défaut
+4. Un meilleur affichage de plusieurs éléments : les balises codes et math (qui sont redimensionnées à l'aide de [textFit](https://github.com/STRML/textFit)), les titres avec des mots longs.
