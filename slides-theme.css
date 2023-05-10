@@ -108,7 +108,7 @@ html.slides code {
 }
 html.slides code {
 	margin-right:0.2em;
-	padding:0 0.1em;
+	padding:0 0.1em!important;
 }
 
 html.slides span.math.display {
