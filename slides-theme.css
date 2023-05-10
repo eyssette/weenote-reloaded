@@ -34,9 +34,7 @@ html.slides div,
 html.slides p,
 html.slides a,
 html.slides figure,
-html.slides figcaption,
-html.slides *::before,
-html.slides *::after {
+html.slides figcaption {
 	all: unset;
 }
 
@@ -218,6 +216,7 @@ html.slides code {
 	background-color: white;
 	width: 70vw;
 	margin-top: 3vh;
+	font-size:0.9em;
 }
 
 html.slides mark {
