@@ -14,6 +14,6 @@ L'idée initiale est conservée : il s'agit de proposer un outil simple pour pou
 Par rapport au script initial, il propose :
 
 1. Une réécriture et optimisation du code.
-2. La possibilité de démarrer le diapo en appuyant sur une touche (`s`ou `p`) ou sur un élément auquel on a appliqué la classe `startSlides`.
+2. La possibilité de démarrer le diapo en appuyant sur une touche (`s`ou `p`) ou sur un élément auquel on a appliqué la classe `startSlides`, et d'en sortir en appuyant sur `Esc`.
 3. Un thème par défaut
 4. Un meilleur affichage de plusieurs éléments : les balises codes et math (qui sont redimensionnées à l'aide de [textFit](https://github.com/STRML/textFit)), les titres avec des mots longs.
