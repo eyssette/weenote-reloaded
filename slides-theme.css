@@ -263,3 +263,7 @@ html.slides .success {
 html.slides .footnote-back {
 	display: none;
 }
+
+html.slides svg {
+	max-width: unset!important;
+}
