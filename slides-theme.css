@@ -1,6 +1,6 @@
 /* RESET CSS */
 
-html.slides {
+html.slides, html.slides section {
 	all: unset;
 	margin: 0;
 	padding: 0;
