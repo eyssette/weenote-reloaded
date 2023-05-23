@@ -265,5 +265,6 @@ html.slides .footnote-back {
 }
 
 html.slides svg {
-	max-width: unset!important;
+	max-width: 75vw!important;
+	max-height: 75vh!important;
 }
