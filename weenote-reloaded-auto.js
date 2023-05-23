@@ -196,5 +196,13 @@ function slideStart() {
 		if (codeElement) {textFit(codeElement,{multiLine: true});}
 		var mathElement = document.querySelectorAll(".math.display")
 		if (mathElement) {textFit(mathElement,{multiLine: true, maxFontSize: 150});}
+
+		const toRemove = document.querySelectorAll('.mermaidTooltip');
+
+		// Parcourir les éléments et les supprimer un par un
+		toRemove.forEach(elementToRemove => {
+			elementToRemove.remove();
+		});
+		
 	})();
 }
