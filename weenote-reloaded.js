@@ -58,7 +58,7 @@ const keyToSlideDirection = {
 
 function handleKeydown(e) {
 	if (!start) {
-		if (!auto && (e.key === "p" || e.key ==="s")) {
+		if (!auto && (e.altKey && (e.key === 'p' || e.keyCode === 80))) {
 			slideStart();
 		}
 	} else {
