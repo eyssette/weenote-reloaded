@@ -272,3 +272,7 @@ html.slides svg {
 	max-width: 75vw!important;
 	max-height: 75vh!important;
 }
+
+.mermaidTooltip {
+	display:none!important;
+}

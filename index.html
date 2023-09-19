@@ -504,6 +504,11 @@
 	</style>
 	<link rel="stylesheet" href="slides-theme.min.css">
 	</link>
+	<!-- <script type="module">
+		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+		window.mermaid = mermaid;
+		mermaid.initialize({ startOnLoad: true });
+	</script> -->
 	<script src="weenote-reloaded.min.js"></script>
 </head>
 
@@ -526,9 +531,7 @@
 	<p>Par rapport au script initial, il propose :</p>
 	<ol type="1">
 		<li>Une réécriture et optimisation du code.</li>
-		<li>La possibilité de démarrer le diapo en appuyant sur une touche
-			(<code>s</code>ou <code>p</code>) ou sur un élément auquel on a appliqué
-			la classe <code>startSlides</code> et d'en sortir en appuyant sur <code>Esc</code>.</li>
+		<li>La possibilité de démarrer le diapo en appuyant sur une combinaison de touches (<code>alt+p</code>) ou sur un élément auquel on a appliqué la classe <code>startSlides</code> et d'en sortir en appuyant sur <code>Esc</code>.</li>
 		<li>Un thème par défaut</li>
 		<li>Un meilleur affichage de plusieurs éléments : les balises codes et
 			math (qui sont redimensionnées à l’aide de <a href="https://github.com/STRML/textFit">textFit</a>), les

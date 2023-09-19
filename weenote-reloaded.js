@@ -33,7 +33,6 @@ function handleClick() {
 		slideStart();
 	}
 }
-
 function load() {
 	if (auto) {
 		slideStart();
@@ -59,7 +58,7 @@ const keyToSlideDirection = {
 
 function handleKeydown(e) {
 	if (!start) {
-		if (!auto && (e.key === "p" || e.key ==="s")) {
+		if (!auto && (e.altKey && (e.key === 'p' || e.keyCode === 80))) {
 			slideStart();
 		}
 	} else {
@@ -107,11 +106,13 @@ function calculateStyles(el) {
 	}
 
 	style.display = "inline";
-	if(el.nodeName !="svg") {style.fontSize = i + "px";}
-	style.position = "absolute";
+	if(el.nodeName !="svg" && !(window.mermaid && el.classList.contains("mermaid"))) {
+		style.fontSize = i + "px";
+		style.position = "absolute";
+	}
 
 	while (true) {
-		if (!el.textContent || el.nodeName ==="svg") break; // S'il n'y a pas de contenu texte, il ne faut pas chercher la taille de police optimale !
+		if (!el.textContent || el.nodeName ==="svg" || (window.mermaid && el.classList.contains("mermaid"))) break; // Cas où il ne faut pas chercher la taille de police optimale
 		if (el.nodeName === "P" || el.nodeName === "BLOCKQUOTE") {
 			smallScreen ? i = Math.min(i, 80) : i = Math.min(i, 150); // Pour les paragraphes et les blockquotes, la taille maximum de la police est 150 sur grand écran, 50 sur petit écran
 		}
@@ -123,9 +124,11 @@ function calculateStyles(el) {
 		style.fontSize = (i -= i * 0.05) + "px";
 	}
 
-	style.display = "block";
-	style.top = top / 2 + "px";
-	style.left = left / 2 + "px";
+	if (!(window.mermaid && el.classList.contains("mermaid"))) {
+		style.display = "block";
+		style.top = top / 2 + "px";
+		style.left = left / 2 + "px";
+	}
 
 	tagName = el.tagName;
 
@@ -178,6 +181,7 @@ function slideStart() {
 	body.appendChild(document.createComment(""));
 
 	!(function sync() {
+		if(window.mermaid) {window.mermaid.run();}
 		setTimeout(sync, 10);
 
 		var next = 0 | location.hash.match(/\d+/);
@@ -202,6 +206,5 @@ function slideStart() {
 		if (codeElement) {textFit(codeElement,{multiLine: true});}
 		var mathElement = document.querySelectorAll(".math.display")
 		if (mathElement) {textFit(mathElement,{multiLine: true, maxFontSize: 150});}
-		
 	})();
 }
