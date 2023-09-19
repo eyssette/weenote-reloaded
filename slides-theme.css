@@ -232,6 +232,10 @@ html.slides ul li:before {
 	content: "- ";
 }
 
+html.slides ul ul {
+	margin-left:1em;
+}
+
 html.slides dd {
 	margin-left: 10vw;
 }
